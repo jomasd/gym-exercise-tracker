@@ -11,7 +11,7 @@ A web application built with MeteorJS to track gym exercises, sets, and reps.
 
 ## Getting Started
 
-1. Clone the repository: `git clone https://github.com/<username>/gym-exercise-tracker.git`
+1. Clone the repository: `git clone https://github.com/jomasd/gym-exercise-tracker.git`
 2. Change into the project directory: `cd gym-exercise-tracker`
 3. Install dependencies: `meteor npm install`
 4. Run the app: `meteor`
