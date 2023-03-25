@@ -14,7 +14,7 @@ export const SetSchema = new SimpleSchema({
   },
   reps: {
     type: Number,
-    label: 'Reps',
+    label: 'Reps Completed',
   },
   setsCompleted: {
     type: Number,

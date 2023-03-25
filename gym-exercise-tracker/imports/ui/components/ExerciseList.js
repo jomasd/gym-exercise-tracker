@@ -6,7 +6,7 @@ const ExerciseList = ({ exercises }) => (
     <h2>Exercises</h2>
     <ul>
       {exercises.map((exercise) => (
-        <li key={exercise._id}>{exercise.name}</li>
+        <li key={exercise._id}>{exercise.name} - {exercise.description} - maxWeight: {exercise.maxWeight} - oneRepMax : {exercise.oneRepMax}</li>
       ))}
     </ul>
   </div>

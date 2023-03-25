@@ -9,7 +9,7 @@ const SetList = ({ sets }) => (
         const exercise = Exercises.findOne(set.exerciseId);
         return (
           <li key={set._id}>
-            {exercise ? exercise.name : ''}: {set.setsCompleted} sets x {set.repsCompleted} reps @ {set.weight} lbs
+            {exercise ? exercise.name : ''}: {set.setsCompleted} sets x {set.reps} reps @ {set.weight} lbs
           </li>
         );
       })}

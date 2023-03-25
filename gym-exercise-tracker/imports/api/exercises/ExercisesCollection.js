@@ -40,6 +40,31 @@ export const ExerciseSchema = new SimpleSchema({
     },
     optional: true,
   },
+  oneRepMax: {
+    type: Number,
+    label: 'One-Rep Max',
+    optional: true,
+  },
+  maxWeight: {
+    type: Number,
+    label: 'Max Weight',
+    optional: true,
+  },
+  totalSets: {
+    type: Number,
+    label: 'Total Sets',
+    optional: true,
+  },
+  totalReps: {
+    type: Number,
+    label: 'Total Reps',
+    optional: true,
+  },
+  totalWeight: {
+    type: Number,
+    label: 'Total Weight',
+    optional: true,
+  },
 });
   
 Exercises.attachSchema(ExerciseSchema);

@@ -15,11 +15,17 @@ const insertExercise = (exercise) => {
   Exercises.insert(exercise);
 };
 
+const insertSet = (set) => {
+  Sets.insert(set);
+};
+
+
 Meteor.startup(() => {
   // If the Exercises collection is empty, add some dummy data.
   if (Exercises.find().count() === 0) {
     insertExercise({
       name: 'Bench Press',
+      description: 'Chest exercise',
       userId: 'user1',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -27,6 +33,7 @@ Meteor.startup(() => {
 
     insertExercise({
       name: 'Squat',
+      description: 'Leg exercise',
       userId: 'user1',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -46,7 +53,6 @@ Meteor.startup(() => {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
-
     insertSet({
       exerciseId: benchPress._id,
       weight: 185,
