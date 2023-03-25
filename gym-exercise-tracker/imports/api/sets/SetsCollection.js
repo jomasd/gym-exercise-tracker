@@ -3,22 +3,45 @@ import { Collection2 } from 'meteor/aldeed:collection2';
 import SimpleSchema from 'simpl-schema';
 export const Sets = new Mongo.Collection('sets');
 
-const SetSchema = new SimpleSchema({
-  exercise: {
+export const SetSchema = new SimpleSchema({
+  exerciseId: {
     type: String,
-    required: true,
-  },
-  setsCompleted: {
-    type: Number,
-    required: true,
-  },
-  repsCompleted: {
-    type: Number,
-    required: true,
+    label: 'Exercise ID',
   },
   weight: {
     type: Number,
-    required: true,
+    label: 'Weight',
+  },
+  reps: {
+    type: Number,
+    label: 'Reps',
+  },
+  setsCompleted: {
+    type: Number,
+    label: 'Sets Completed',
+  },
+  createdAt: {
+    type: Date,
+    label: 'Created At',
+    autoValue: function() {
+      if (this.isInsert) {
+        return new Date();
+      } else if (this.isUpsert) {
+        return {$setOnInsert: new Date()};
+      } else {
+        this.unset();
+      }
+    },
+  },
+  updatedAt: {
+    type: Date,
+    label: 'Updated At',
+    autoValue: function() {
+      if (this.isUpdate) {
+        return new Date();
+      }
+    },
+    optional: true,
   },
 });
 

@@ -5,11 +5,11 @@ import { Meteor } from 'meteor/meteor';
 const AddExerciseForm = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-
+  const [userId, setUserId] = "user1";
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    Meteor.call('exercises.insert', name, description);
+    Meteor.call('exercises.insert', name, description, "user1" );
     setName('');
     setDescription('');
   };

@@ -1,56 +1,78 @@
 import { Meteor } from 'meteor/meteor';
-
 import { Exercises } from '../imports/api/exercises/ExercisesCollection';
 import { Sets } from '../imports/api/sets/SetsCollection';
 
-async function insertExercise({ name, description }) {
-  await Exercises.insertAsync({ name, description });
-}
+// Import Sets 
+import '../imports/api/sets/methods';
+import '../imports/api/sets/publications';
 
-async function insertSet({ exercise, setsCompleted, repsCompleted, weight }) {
-  await Sets.insertAsync({ exercise, setsCompleted, repsCompleted, weight, createdAt: new Date() });
-}
+//Exercises 
+import '../imports/api/exercises/methods';
+import '../imports/api/exercises/publications';
 
 
-Meteor.startup(async () => {
+const insertExercise = (exercise) => {
+  Exercises.insert(exercise);
+};
+
+Meteor.startup(() => {
   // If the Exercises collection is empty, add some dummy data.
-  if (await Exercises.find().countAsync() === 0) {
-    await insertExercise({
+  if (Exercises.find().count() === 0) {
+    insertExercise({
       name: 'Bench Press',
-      description: 'Chest exercise'
+      userId: 'user1',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
-    await insertExercise({
+    insertExercise({
       name: 'Squat',
-      description: 'Leg exercise'
+      userId: 'user1',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
   }
 
   // If the Sets collection is empty, add some dummy data.
-  if (await Sets.find().countAsync() === 0) {
-    const exerciseId = (await Exercises.findOne({ name: 'Bench Press' }))._id;
+  if (Sets.find().count() === 0) {
+    const benchPress = Exercises.findOne({ name: 'Bench Press' });
+    const squat = Exercises.findOne({ name: 'Squat' });
 
-    await insertSet({
-      exercise: exerciseId,
-      setsCompleted: 3,
-      repsCompleted: 10,
-      weight: 135
+    insertSet({
+      exerciseId: benchPress._id,
+      weight: 135,
+      setsCompleted: 10,
+      reps: 10,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
-    await insertSet({
-      exercise: exerciseId,
-      setsCompleted: 4,
-      repsCompleted: 8,
-      weight: 185
+    insertSet({
+      exerciseId: benchPress._id,
+      weight: 185,
+      setsCompleted: 10,
+      reps: 8,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    insertSet({
+      exerciseId: squat._id,
+      weight: 225,
+      setsCompleted: 10,
+      reps: 8,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    insertSet({
+      exerciseId: squat._id,
+      weight: 275,
+      setsCompleted: 10,
+      reps: 6,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
   }
 
-  // Publish the entire Exercises and Sets collections to all clients.
-  Meteor.publish('exercises', function () {
-    return Exercises.find();
-  });
-
-  Meteor.publish('sets', function () {
-    return Sets.find();
-  });
 });

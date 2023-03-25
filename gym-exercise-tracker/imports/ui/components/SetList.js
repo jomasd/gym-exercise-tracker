@@ -1,15 +1,18 @@
 // imports/ui/components/SetList.js
 import React from 'react';
-
+import { Exercises } from '../../api/exercises/ExercisesCollection';
 const SetList = ({ sets }) => (
   <div>
     <h2>Sets</h2>
     <ul>
-      {sets.map((set) => (
-        <li key={set._id}>
-          {set.exercise}: {set.setsCompleted} sets x {set.repsCompleted} reps @ {set.weight} lbs
-        </li>
-      ))}
+      {sets.map((set) => {
+        const exercise = Exercises.findOne(set.exerciseId);
+        return (
+          <li key={set._id}>
+            {exercise ? exercise.name : ''}: {set.setsCompleted} sets x {set.repsCompleted} reps @ {set.weight} lbs
+          </li>
+        );
+      })}
     </ul>
   </div>
 );
