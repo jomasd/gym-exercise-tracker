@@ -1,46 +1,56 @@
 import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Menubar } from 'primereact/menubar';
+import { Button } from 'primereact/button';
+import { PrimeIcons } from 'primereact/api';
 
 
 export const NavbarMain = () => {
+  const items = [
+    {
+      label: 'Exercise Tracker',
+      url: '/',
+    },
+    {
+      label: 'Exercises',
+      url: '/exercises',
+    },
+    {
+      label: 'Sets',
+      url: '/sets',
+    },
+    {
+      label: 'Total Reps',
+      url: '/totalreps',
+    },
+    {
+      label: 'Max Weight',
+      url: '/maxweight',
+    },
+    {
+      label: 'Profile',
+      url: '/profile',
+    },
+    {
+      label: 'Sign In',
+      url: '/signin',
+    },
+    {
+      label: 'Sign Up',
+      url: '/signup',
+    },
+  ];
+
+  const end = (
+    <div className="p-d-flex p-ai-center">
+      <Button className="p-button-rounded p-button-outlined p-mr-2" icon="pi pi-shopping-cart" />
+      <Button className="p-button-rounded p-button-outlined p-mr-2" icon="pi pi-bell" badge="1" />
+      <Button className="p-button-rounded p-button-outlined" icon="pi pi-user" />
+    </div>
+  );
+
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
-      <Container>
-        <LinkContainer to="/">
-          <Navbar.Brand>Exercise Tracker</Navbar.Brand>
-        </LinkContainer>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-           <Nav className="me-auto">
-            <LinkContainer to="/exercises">
-              <Nav.Link>Exercises</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/sets">
-              <Nav.Link>Sets</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/totalreps">
-              <Nav.Link>Total Reps</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/maxweight">
-              <Nav.Link>Max Weight</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/profile">
-              <Nav.Link>Profile</Nav.Link>
-            </LinkContainer>
-          </Nav>
-          <Nav>
-            <LinkContainer to="/signin">
-              <Nav.Link>Sign In</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/signup">
-              <Nav.Link>Sign Up</Nav.Link>
-            </LinkContainer>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className="mb-4">
+      <Menubar model={items} end={end} />
+    </div>
   );
 };
-
-

@@ -9,11 +9,18 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.20.7",
+    "@material/web": "^1.0.0-pre.5",
+    "@mui/material": "^5.11.14",
     "bootstrap": "^5.2.3",
+    "material-components-web": "^14.0.0",
     "meteor-node-stubs": "^1.2.5",
+    "primeflex": "^3.3.0",
+    "primeicons": "^6.0.1",
+    "primereact": "^9.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.8.0",
     "react-router-bootstrap": "^0.26.2",
     "react-router-dom": "^6.9.0",
     "simpl-schema": "^3.4.1"

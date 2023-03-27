@@ -1,20 +1,58 @@
-// imports/ui/components/SetList.js
 import React from 'react';
-import { Exercises } from '../../api/exercises/ExercisesCollection';
-const SetList = ({ sets }) => (
-  <div>
-    <h2>Sets</h2>
-    <ul>
-      {sets.map((set) => {
-        const exercise = Exercises.findOne(set.exerciseId);
-        return (
-          <li key={set._id}>
-            {exercise ? exercise.name : ''}: {set.setsCompleted} sets x {set.reps} reps @ {set.weight} lbs
-          </li>
-        );
-      })}
-    </ul>
-  </div>
-);
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import {Exercises} from '../../api/exercises/ExercisesCollection';
 
-export default SetList;
+const SetsList = ({ sets }) => {
+
+
+  const header = (
+    <div className="table-header">
+      List of Sets
+    </div>
+  );
+
+  const footer = `There are ${sets.length} sets in total.`;
+
+  const nameBodyTemplate = (rowData) => {
+    const exercise = Exercises.findOne(rowData.exerciseId);
+    return (
+      <React.Fragment>
+        {exercise.name}
+      </React.Fragment>
+    );
+  }
+
+  const weightBodyTemplate = (rowData) => {
+    return (
+      <React.Fragment>
+        {rowData.weight} lbs
+      </React.Fragment>
+    );
+  }
+
+  const repsBodyTemplate = (rowData) => {
+    return (
+      <React.Fragment>
+        {rowData.reps}
+      </React.Fragment>
+    );
+  }
+  const setsBodyTemplate = (rowData) => {
+    return (
+      <React.Fragment>
+        {rowData.setsCompleted}
+      </React.Fragment>
+    );
+  }
+  return (
+    <DataTable value={sets} header={header} footer={footer} className="p-datatable-customers" dataKey="id">
+      <Column field="name" header="Name" body={nameBodyTemplate}></Column>
+      <Column field="weight" header="Weight" body={weightBodyTemplate}></Column>
+      <Column field="Sets" header="Sets" body={setsBodyTemplate}></Column>
+      <Column field="reps" header="Reps" body={repsBodyTemplate}></Column>
+    </DataTable>
+  );
+}
+
+export default SetsList;

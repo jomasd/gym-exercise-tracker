@@ -1,14 +1,11 @@
-// imports/ui/components/ExerciseList.js
 import React from 'react';
+import ExerciseCard from './ExerciseCard';
 
 const ExerciseList = ({ exercises }) => (
-  <div>
-    <h2>Exercises</h2>
-    <ul>
-      {exercises.map((exercise) => (
-        <li key={exercise._id}>{exercise.name} - {exercise.description} - maxWeight: {exercise.maxWeight} - oneRepMax : {exercise.oneRepMax}</li>
-      ))}
-    </ul>
+  <div className="p-grid">
+    {exercises.map((exercise) => (
+      <ExerciseCard key={exercise._id} exercise={exercise} />
+    ))}
   </div>
 );
 

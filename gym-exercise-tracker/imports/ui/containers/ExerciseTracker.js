@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Exercises } from '../../api/exercises/ExercisesCollection';
 import { Sets } from '../../api/sets/SetsCollection';
-import ExerciseList from '../components/ExerciseList';
+import ExerciseList  from '../components/ExerciseList';
 import AddExerciseForm from '../components/AddExerciseForm';
 import AddSetForm from '../components/AddSetForm';
 import SetList from '../components/SetList';
@@ -14,7 +14,7 @@ import SetList from '../components/SetList';
 const ExerciseTracker = ({exercises, sets}) => (
   <div>
     <AddExerciseForm />
-    <ExerciseList exercises={exercises} />
+    <ExerciseList  exercises={exercises} />
     <AddSetForm exercises={exercises} />
     <SetList sets={sets} />
   </div>
