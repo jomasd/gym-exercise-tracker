@@ -15,8 +15,6 @@ const ExerciseTracker = ({exercises, sets}) => (
   <div>
     <AddExerciseForm />
     <ExerciseList  exercises={exercises} />
-    <AddSetForm exercises={exercises} />
-    <SetList sets={sets} />
   </div>
 );
 

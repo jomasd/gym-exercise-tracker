@@ -46,11 +46,11 @@ const SetsList = ({ sets }) => {
     );
   }
   return (
-    <DataTable value={sets} header={header} footer={footer} className="p-datatable-customers" dataKey="id">
-      <Column field="name" header="Name" body={nameBodyTemplate}></Column>
-      <Column field="weight" header="Weight" body={weightBodyTemplate}></Column>
-      <Column field="Sets" header="Sets" body={setsBodyTemplate}></Column>
-      <Column field="reps" header="Reps" body={repsBodyTemplate}></Column>
+    <DataTable removableSort value={sets} header={header} footer={footer} className="p-datatable-customers" dataKey="id">
+      <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>
+      <Column field="weight" header="Weight" body={weightBodyTemplate} sortable></Column>
+      <Column field="Sets" header="Sets" body={setsBodyTemplate} sortable></Column>
+      <Column field="reps" header="Reps" body={repsBodyTemplate} sortable></Column>
     </DataTable>
   );
 }

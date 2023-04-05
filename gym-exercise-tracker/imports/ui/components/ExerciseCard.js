@@ -1,42 +1,68 @@
-import React from 'react';
-import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
-import { Avatar } from 'primereact/avatar';
+import React, { useState, useEffect } from 'react';
+import { ExerciseService } from './service/ExerciseService';
+import { DataView, DataViewLayoutOptions } from 'primereact/dataview';
 
-const ExerciseCard = ({ exercise }) => {
-  const header = (
-    <Avatar
-      label={exercise.name.substring(0, 2).toUpperCase()}
-      className="p-mr-2"
-      style={{ backgroundColor: '#007ad9' }}
-    />
-  );
+export default function ExerciseList() {
+  const [exercises, setExercises] = useState([]);
+  const [layout, setLayout] = useState('grid');
 
-  const footer = (
-    <div className="p-grid p-nogutter p-justify-between">
-      <Button label="Details" icon="pi pi-info-circle" className="p-button-raised p-button-info" />
-      <Button label="Manage" icon="pi pi-pencil" className="p-button-raised p-button-secondary" />
-    </div>
-  );
+  useEffect(() => {
+    ExerciseService.getExercises().then((data) => setExercises(data));
+  }, []);
+
+  const listItem = (exercise) => {
+    return (
+      <div className="p-4 border-1 surface-border surface-card border-round">
+        <h2 className="text-2xl font-bold">{exercise.name}</h2>
+        <p className="text-xl">{exercise.description}</p>
+        <ul>
+          <li>Max weight: {exercise.maxWeight}</li>
+          <li>One rep max: {exercise.oneRepMax}</li>
+          <li>Total reps: {exercise.totalReps}</li>
+          <li>Total sets: {exercise.totalSets}</li>
+          <li>Total weight: {exercise.totalWeight}</li>
+        </ul>
+      </div>
+    );
+  };
+
+  const gridItem = (exercise) => {
+    return (
+      <div className="p-4 border-1 surface-border surface-card border-round">
+        <h2 className="text-2xl font-bold">{exercise.name}</h2>
+        <img src={`https://via.placeholder.com/150`} alt={exercise.name} />
+        <p>{exercise.description}</p>
+        <ul>
+          <li>Max weight: {exercise.maxWeight}</li>
+          <li>One rep max: {exercise.oneRepMax}</li>
+          <li>Total reps: {exercise.totalReps}</li>
+          <li>Total sets: {exercise.totalSets}</li>
+          <li>Total weight: {exercise.totalWeight}</li>
+        </ul>
+      </div>
+    );
+  };
+
+  const itemTemplate = (exercise, layout) => {
+    if (!exercise) {
+      return;
+    }
+
+    if (layout === 'list') return listItem(exercise);
+    else if (layout === 'grid') return gridItem(exercise);
+  };
+
+  const header = () => {
+    return (
+      <div className="flex justify-content-end">
+        <DataViewLayoutOptions layout={layout} onChange={(e) => setLayout(e.value)} />
+      </div>
+    );
+  };
 
   return (
-    <div className="p-col-6 p-md-3 p-lg-2 p-xl-1">
-      <Card
-        title={exercise.name}
-        subTitle={exercise.description}
-        footer={footer}
-        header={header}
-        className="p-shadow-3"
-      >
-        <div className="p-grid p-nogutter">
-          <div className="p-col-6">Total Reps</div>
-          <div className="p-col-6">{exercise.totalReps}</div>
-          <div className="p-col-6">Highest Weight</div>
-          <div className="p-col-6">{exercise.maxWeight}</div>
-        </div>
-      </Card>
+    <div className="card">
+      <DataView value={exercises} itemTemplate={itemTemplate} layout={layout} header={header()} />
     </div>
   );
-};
-
-export default ExerciseCard;
+}
