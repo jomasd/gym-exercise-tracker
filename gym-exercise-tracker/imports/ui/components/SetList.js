@@ -46,7 +46,7 @@ const SetsList = ({ sets }) => {
     );
   }
   return (
-    <DataTable removableSort value={sets} header={header} footer={footer} className="p-datatable-customers" dataKey="id">
+    <DataTable removableSort value={sets} header={header} footer={footer} className="p-datatable-customers">
       <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>
       <Column field="weight" header="Weight" body={weightBodyTemplate} sortable></Column>
       <Column field="Sets" header="Sets" body={setsBodyTemplate} sortable></Column>

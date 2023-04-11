@@ -41,11 +41,14 @@ export const NavbarMain = () => {
   ];
 
   const end = (
+    <></>
+    /* 
     <div className="p-d-flex p-ai-center">
       <Button className="p-button-rounded p-button-outlined p-mr-2" icon="pi pi-shopping-cart" />
       <Button className="p-button-rounded p-button-outlined p-mr-2" icon="pi pi-bell" badge="1" />
       <Button className="p-button-rounded p-button-outlined" icon="pi pi-user" />
     </div>
+    */
   );
 
   return (

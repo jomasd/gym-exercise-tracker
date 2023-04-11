@@ -1,9 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { useHistory } from 'react-router-dom'; 
 
 const ExerciseList = ({ exercises }) => {
   const [selectedExercise, setSelectedExercise] = useState(null);
+
+  const rowclickHandler = (e) => {
+
+    console.log('clicked it'); 
+  };
+
 
   const header = (
     <div className="p-clearfix">
@@ -52,6 +59,7 @@ const ExerciseList = ({ exercises }) => {
         selectionMode="single"
         selection={selectedExercise}
         onSelectionChange={(e) => setSelectedExercise(e.value)}
+        onClick={rowclickHandler}
       >
         <Column field="_id" header="ID" />
         <Column field="name" header="Name" body={exerciseBodyTemplate} />
