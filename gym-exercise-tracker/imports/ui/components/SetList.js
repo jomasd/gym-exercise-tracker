@@ -38,7 +38,7 @@ const SetsList = ({ sets }) => {
       </React.Fragment>
     );
   }
-  const setsBodyTemplate = (rowData) => {
+  const setCompletedBodyTemplate = (rowData) => {
     return (
       <React.Fragment>
         {rowData.setsCompleted}
@@ -49,7 +49,7 @@ const SetsList = ({ sets }) => {
     <DataTable removableSort value={sets} header={header} footer={footer} className="p-datatable-customers">
       <Column field="name" header="Name" body={nameBodyTemplate} sortable></Column>
       <Column field="weight" header="Weight" body={weightBodyTemplate} sortable></Column>
-      <Column field="Sets" header="Sets" body={setsBodyTemplate} sortable></Column>
+      <Column field="setCompleted" header="Sets" body={setCompletedBodyTemplate} sortable></Column>
       <Column field="reps" header="Reps" body={repsBodyTemplate} sortable></Column>
     </DataTable>
   );

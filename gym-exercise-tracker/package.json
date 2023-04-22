@@ -16,7 +16,7 @@
     "meteor-node-stubs": "^1.2.5",
     "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
-    "primereact": "^9.2.1",
+    "primereact": "^9.2.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",

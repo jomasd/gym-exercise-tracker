@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { useHistory } from 'react-router-dom'; 
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const ExerciseList = ({ exercises }) => {
   const [selectedExercise, setSelectedExercise] = useState(null);
-
-  const rowclickHandler = (e) => {
-
-    console.log('clicked it'); 
-  };
-
+  
+  const navigate = useNavigate();
 
   const header = (
     <div className="p-clearfix">
@@ -18,6 +14,7 @@ const ExerciseList = ({ exercises }) => {
     </div>
   );
 
+  
   const exerciseBodyTemplate = (rowData) => {
     return <span>{rowData.name}</span>;
   };
@@ -50,7 +47,11 @@ const ExerciseList = ({ exercises }) => {
     const date = new Date(rowData.updatedAt);
     return <span>{date.toLocaleString()}</span>;
   };
-
+  const rowclickHandler = ({data}) => {
+    // Navigate to the details page for the selected row
+    navigate(`/exercises/${data._id}`);
+    console.log(data._id); 
+  };
   return (
     <div className="card">
       <DataTable
@@ -59,7 +60,7 @@ const ExerciseList = ({ exercises }) => {
         selectionMode="single"
         selection={selectedExercise}
         onSelectionChange={(e) => setSelectedExercise(e.value)}
-        onClick={rowclickHandler}
+        onRowClick={rowclickHandler}
       >
         <Column field="_id" header="ID" />
         <Column field="name" header="Name" body={exerciseBodyTemplate} />
