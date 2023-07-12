@@ -1,25 +1,34 @@
+// Import Meteor package
 import { Meteor } from 'meteor/meteor';
+
+// Import collections
 import { Exercises } from '../imports/api/exercises/ExercisesCollection';
 import { Sets } from '../imports/api/sets/SetsCollection';
+import { WorkoutLists } from '../imports/api/workoutLists/WorkoutListsCollection';
 
-// Import Sets 
+// Import Sets methods and publications
 import '../imports/api/sets/methods';
 import '../imports/api/sets/publications';
 
-//Exercises 
+// Import Exercises methods and publications
 import '../imports/api/exercises/methods';
 import '../imports/api/exercises/publications';
 
+// Import WorkoutLists methods and publications
+import '../imports/api/workoutLists/methods';
+import '../imports/api/workoutLists/publications';
 
+// Helper function to insert an exercise into the Exercises collection
 const insertExercise = (exercise) => {
   Exercises.insert(exercise);
 };
 
+// Helper function to insert a set into the Sets collection
 const insertSet = (set) => {
   Sets.insert(set);
 };
 
-
+// Meteor startup function
 Meteor.startup(() => {
   // If the Exercises collection is empty, add some dummy data.
   if (Exercises.find().count() === 0) {
@@ -81,4 +90,22 @@ Meteor.startup(() => {
     });
   }
 
+  // If the WorkoutLists collection is empty, add some dummy data.
+  if (WorkoutLists.find().count() === 0) {
+    WorkoutLists.insert({
+      name: 'Workout List 1',
+      userId: 'user1',
+      exercises: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+
+    WorkoutLists.insert({
+      name: 'Workout List 2',
+      userId: 'user1',
+      exercises: [],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }
 });
