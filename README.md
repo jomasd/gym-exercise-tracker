@@ -1,51 +1,27 @@
 # Gym Exercise Tracker
 
-A web application built with MeteorJS and React to track gym exercises, sets, and reps.
+Gym Exercise Tracker is a web application built with Meteor and React. It allows users to track their exercises, sets, and progress over time.
 
 ## Features
-- Track exercises, sets, and reps
-- View total reps for each exercise
-- View the maximum weight for each exercise
-- User authentication
 
-## Getting Started
-1. Clone the repository: `git clone https://github.com/<username>/gym-exercise-tracker.git`
-2. Change into the project directory: `meteor`
-3. Install dependencies: `meteor npm install`
-4. Run the app: `meteor`
-5. Access the app in your browser at `http://localhost:3000`
+- Track exercises: Users can add exercises to their list, including details like name and description.
+- Track sets: Users can add sets to their exercises, including details like weight, reps, and date.
+- View progress: Users can view their progress over time, including their one-rep max, max weight, total sets, total reps, and total weight.
 
-## Building the App
-1. **Define the purpose of the app and its features:**
+## Future Features
 
-   The purpose of the app is to track gym exercises, sets, and reps. The app should allow the user to:
-   - Track exercises, sets, and reps.
-   - View total reps for each exercise.
-   - View the maximum weight for each exercise.
-   - Have user authentication.
+- Workout lists: Users will be able to group exercises into workout lists. This will allow users to plan their workouts ahead of time and track their progress on a per-workout basis.
+- Social features: Users will be able to share their workouts and progress with others, compare their progress with their friends, and even compete in challenges.
+- Personalized recommendations: Based on a user's progress and goals, the app will recommend exercises and workouts to help them reach their goals.
 
-2. **Decide on the data structure and how it will be stored in collections:**
+## Setup
 
-   - Create a collection called Exercises to store information about each exercise (e.g., name, description).
-   - Create a collection called Sets to store information about each set of reps (e.g., exercise, sets completed, reps completed, weight).
+To set up the app locally, clone the repository and install the dependencies with `npm install`. Then, start the app with `meteor run`.
 
-3. **Determine the UI structure and how the user will interact with the app:**
+## Contributing
 
-   - Create a React component called `TrackExercise` to display a form where the user can enter information about a set of reps.
-   - Create a React component called `ViewTotalReps` to display the total number of reps for each exercise.
-   - Create a React component called `ViewMaxWeight` to display the maximum weight for each exercise.
-   - Add user authentication using the `accounts-ui` and `accounts-password` packages.
+Contributions are welcome! Please read the [contributing guide](CONTRIBUTING.md) for more information.
 
-4. **Create a new MeteorJS project using the `meteor create --react` command.**
+## License
 
-5. **Define the data structure by creating collections in the `imports/api` folder.**
-
-6. **Create React components in the `imports/ui` folder to display the data on the screen.**
-
-7. **Add events to the components to handle user interactions (e.g., form submissions).**
-
-8. **Create helpers to fetch data from collections and display it on the screen.**
-
-9. **Add routing using the `react-router` package to navigate between different pages in the app.**
-
-10. **Deploy the app using the `meteor deploy` command or a hosting service (e.g., Heroku, DigitalOcean).**
+This project is licensed under the [MIT License](LICENSE).
