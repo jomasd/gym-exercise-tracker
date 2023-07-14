@@ -1,9 +1,9 @@
 import { Mongo } from 'meteor/mongo';
 import { Collection2 } from 'meteor/aldeed:collection2';
 import SimpleSchema from 'simpl-schema';
-export const WorkoutLists = new Mongo.Collection('workoutLists');
+export const Workouts = new Mongo.Collection('workouts');
 
-export const WorkoutListSchema = new SimpleSchema({
+export const WorkoutSchema = new SimpleSchema({
   name: {
     type: String,
     label: 'Name',
@@ -47,4 +47,4 @@ export const WorkoutListSchema = new SimpleSchema({
   },
 });
   
-WorkoutLists.attachSchema(WorkoutListSchema);
+Workouts.attachSchema(WorkoutSchema);

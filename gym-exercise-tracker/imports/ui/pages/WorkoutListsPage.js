@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { WorkoutLists } from '../../api/workout/WorkoutCollection';
+import { WorkoutLists } from '../../api/workouts/WorkoutsCollection';
 import WorkoutListList from '../components/WorkoutListList';
 
 const WorkoutListsPage = ({ workoutLists }) => {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { WorkoutLists } from '../../api/workoutLists/WorkoutListsCollection';
+import { WorkoutLists } from '../../api/workouts/WorkoutsCollection';
 
 const WorkoutListDetails = ({ workoutList }) => {
   const { id } = useParams();
