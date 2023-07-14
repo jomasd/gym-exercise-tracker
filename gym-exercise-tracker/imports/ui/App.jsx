@@ -8,8 +8,8 @@ import { SignUpPage } from './pages/SignUpPage';
 import { TotalRepsPage } from './pages/TotalRepsPage';
 import { MaxWeightPage } from './pages/MaxWeightPage';
 import { ProfilePage } from './pages/ProfilePage';
-import { ExercisePage} from '../ui/pages/ExercisePage/ExercisePage';
-//import { WorkoutListsPage } from './pages/WorkoutListsPage';
+import { ExercisePage } from '../ui/pages/ExercisePage/ExercisePage';
+import { WorkoutsPage } from './pages/WorkoutsPage';
 import { NavbarMain } from '../../imports/ui/Navbar/navbarMain';
 
 export const App = () => (
@@ -26,7 +26,7 @@ export const App = () => (
           <Route path="/maxweight" element={<MaxWeightPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/exercises/:exerciseId" element={<ExercisePage />} />
-          {/* <Route path="/workoutLists" element={<WorkoutListsPage />} /> */}
+          <Route path="/workouts" element={<WorkoutsPage />} />
           <Route path="*" element={<h1>404 - Page Not Found</h1>} />
         </Routes>
     </Router>
