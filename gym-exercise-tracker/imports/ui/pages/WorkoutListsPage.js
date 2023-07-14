@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { WorkoutLists } from '../../api/workoutLists/WorkoutListsCollection';
+import { WorkoutLists } from '../../api/workout/WorkoutCollection';
 import WorkoutListList from '../components/WorkoutListList';
 
 const WorkoutListsPage = ({ workoutLists }) => {
@@ -16,6 +16,6 @@ const WorkoutListsPage = ({ workoutLists }) => {
 export default withTracker(() => {
   Meteor.subscribe('workoutLists');
   return {
-    workoutLists: WorkoutLists.find().fetch(),
+    workouts: Workout.find().fetch(),
   };
 })(WorkoutListsPage);
