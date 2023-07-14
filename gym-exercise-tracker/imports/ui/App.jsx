@@ -10,6 +10,8 @@ import { MaxWeightPage } from './pages/MaxWeightPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { ExercisePage } from '../ui/pages/ExercisePage/ExercisePage';
 import { WorkoutsPage } from './pages/WorkoutsPage';
+import { WorkoutDetailsPage } from './pages/WorkoutDetailsPage';
+import { WorkoutEditPage } from './pages/WorkoutEditPage';
 import { NavbarMain } from '../../imports/ui/Navbar/navbarMain';
 
 export const App = () => (
@@ -27,6 +29,8 @@ export const App = () => (
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/exercises/:exerciseId" element={<ExercisePage />} />
           <Route path="/workouts" element={<WorkoutsPage />} />
+          <Route path="/workouts/:workoutId" element={<WorkoutDetailsPage />} />
+          <Route path="/workouts/:workoutId/edit" element={<WorkoutEditPage />} />
           <Route path="*" element={<h1>404 - Page Not Found</h1>} />
         </Routes>
     </Router>
