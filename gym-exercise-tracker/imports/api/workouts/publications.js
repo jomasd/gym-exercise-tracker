@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
-import { WorkoutLists } from './WorkoutListsCollection';
+import { Workouts } from './WorkoutsCollection';
 
-Meteor.publish('workoutLists', function workoutListsPublication() {
-  return WorkoutLists.find();
+Meteor.publish('workouts', function workoutsPublication() {
+  return Workouts.find();
 });
