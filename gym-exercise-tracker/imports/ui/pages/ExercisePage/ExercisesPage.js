@@ -1,5 +1,5 @@
 import React from 'react';
-import ExerciseTracker from '../containers/ExerciseTracker';
+import ExerciseTracker from '../../containers/ExerciseTracker';
 
 export const ExercisesPage = () => {
   return (

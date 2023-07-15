@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Workouts } from '../../api/workouts/WorkoutsCollection';
-import { Workout } from '../components/Workout';
+import { Workouts } from '../../../api/workouts/WorkoutsCollection';
+import { Workout } from '../../components/Workout';
 
 const WorkoutDetailsPage = ({ workout }) => (
   <div className="workout-details-page">

@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 // Import collections
 import { Exercises } from '../imports/api/exercises/ExercisesCollection';
 import { Sets } from '../imports/api/sets/SetsCollection';
-import { WorkoutLists } from '../imports/api/workoutLists/WorkoutListsCollection';
+import { Workouts } from '../imports/api/workouts/WorkoutsCollection';
 
 // Import Sets methods and publications
 import '../imports/api/sets/methods';
@@ -14,9 +14,9 @@ import '../imports/api/sets/publications';
 import '../imports/api/exercises/methods';
 import '../imports/api/exercises/publications';
 
-// Import WorkoutLists methods and publications
-import '../imports/api/workoutLists/methods';
-import '../imports/api/workoutLists/publications';
+// Import Workouts methods and publications
+import '../imports/api/workouts/methods';
+import '../imports/api/workouts/publications';
 
 // Helper function to insert an exercise into the Exercises collection
 const insertExercise = (exercise) => {
@@ -91,8 +91,8 @@ Meteor.startup(() => {
   }
 
   // If the WorkoutLists collection is empty, add some dummy data.
-  if (WorkoutLists.find().count() === 0) {
-    WorkoutLists.insert({
+  if (Workouts.find().count() === 0) {
+    Workouts.insert({
       name: 'Workout List 1',
       userId: 'user1',
       exercises: [],
@@ -100,7 +100,7 @@ Meteor.startup(() => {
       updatedAt: new Date(),
     });
 
-    WorkoutLists.insert({
+    Workouts.insert({
       name: 'Workout List 2',
       userId: 'user1',
       exercises: [],
