@@ -1,5 +1,5 @@
 import React from 'react';
-import SetsTracker from '../containers/SetsTracker';
+import SetsTracker from '../../containers/SetsTracker';
 
 export const SetsPage = () => {
   return (
