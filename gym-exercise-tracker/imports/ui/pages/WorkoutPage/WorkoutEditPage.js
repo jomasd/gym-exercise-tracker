@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Workouts } from '../../api/workouts/WorkoutsCollection';
+import { Workouts } from '../../../api/workouts/WorkoutsCollection';
 
 const WorkoutEditPage = ({ workout }) => {
   const [name, setName] = useState(workout ? workout.name : '');
