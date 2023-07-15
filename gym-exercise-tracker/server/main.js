@@ -30,6 +30,8 @@ const insertSet = (set) => {
 
 // Meteor startup function
 Meteor.startup(() => {
+  let benchPress, squat;
+
   // If the Exercises collection is empty, add some dummy data.
   if (Exercises.find().count() === 0) {
     insertExercise({
@@ -38,6 +40,11 @@ Meteor.startup(() => {
       userId: 'user1',
       createdAt: new Date(),
       updatedAt: new Date(),
+      oneRepMax: 225,
+      maxWeight: 185,
+      totalSets: 20,
+      totalReps: 200,
+      totalWeight: 3700,
     });
 
     insertExercise({
@@ -46,14 +53,19 @@ Meteor.startup(() => {
       userId: 'user1',
       createdAt: new Date(),
       updatedAt: new Date(),
+      oneRepMax: 315,
+      maxWeight: 275,
+      totalSets: 20,
+      totalReps: 160,
+      totalWeight: 4400,
     });
+
+    benchPress = Exercises.findOne({ name: 'Bench Press' });
+    squat = Exercises.findOne({ name: 'Squat' });
   }
 
   // If the Sets collection is empty, add some dummy data.
-  if (Sets.find().count() === 0) {
-    const benchPress = Exercises.findOne({ name: 'Bench Press' });
-    const squat = Exercises.findOne({ name: 'Squat' });
-
+  if (Sets.find().count() === 0 && benchPress && squat) {
     insertSet({
       exerciseId: benchPress._id,
       weight: 135,
@@ -91,11 +103,11 @@ Meteor.startup(() => {
   }
 
   // If the WorkoutLists collection is empty, add some dummy data.
-  if (Workouts.find().count() === 0) {
+  if (Workouts.find().count() === 0 && benchPress && squat) {
     Workouts.insert({
       name: 'Workout List 1',
       userId: 'user1',
-      exercises: [],
+      exercises: [benchPress._id, squat._id],
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -103,9 +115,10 @@ Meteor.startup(() => {
     Workouts.insert({
       name: 'Workout List 2',
       userId: 'user1',
-      exercises: [],
+      exercises: [squat._id],
       createdAt: new Date(),
       updatedAt: new Date(),
     });
   }
 });
+

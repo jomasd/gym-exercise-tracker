@@ -1,24 +1,44 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import { useTracker } from 'meteor/react-meteor-data';
+import { Workouts } from '../../api/workouts/WorkoutsCollection';
+import { Exercises } from '../../api/exercises/ExercisesCollection';
+import { Card } from 'primereact/card';
+import { Panel } from 'primereact/panel';
+import { Divider } from 'primereact/divider';
+import ExerciseList from './ExerciseList';
 
-export const Workout = ({ workout }) => (
-  <div className="workout">
-    <h2>{workout.name}</h2>
-    <p>Created at: {workout.createdAt.toString()}</p>
-    <p>Updated at: {workout.updatedAt ? workout.updatedAt.toString() : 'Never'}</p>
-    <ul>
-      {workout.exercises.map((exercise) => (
-        <li key={exercise}>{exercise}</li>
-      ))}
-    </ul>
-  </div>
-);
+export const WorkoutDetailsPage = () => {
+  const { workoutId } = useParams();
+  const { workout, exercises } = useTracker(() => {
+    Meteor.subscribe('workouts');
+    Meteor.subscribe('exercises');
+    const workout = Workouts.findOne(workoutId);
+    const exercises = Exercises.find().fetch();
+    return { workout, exercises };
+  });
 
-Workout.propTypes = {
-  workout: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    createdAt: PropTypes.instanceOf(Date).isRequired,
-    updatedAt: PropTypes.instanceOf(Date),
-    exercises: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
+  if (!workout || !exercises) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <>
+      <Panel header={workout.name}>
+        <Card className="workout-card">
+          <p className="text-muted">{workout.description}</p>
+          <Divider />
+          <ul>
+            <li>Total Sets: {workout.totalSets}</li>
+            <li>Total Reps: {workout.totalReps}</li>
+            <li>Total Weight: {workout.totalWeight} lbs</li>
+          </ul>
+        </Card>
+      </Panel>
+      <Divider />
+      <Panel header="Exercises">
+        <ExerciseList exercises={exercises} />
+      </Panel>
+    </>
+  );
 };
