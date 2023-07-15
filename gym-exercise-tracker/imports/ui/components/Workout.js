@@ -1,44 +1,48 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useTracker } from 'meteor/react-meteor-data';
-import { Workouts } from '../../api/workouts/WorkoutsCollection';
-import { Exercises } from '../../api/exercises/ExercisesCollection';
-import { Card } from 'primereact/card';
-import { Panel } from 'primereact/panel';
-import { Divider } from 'primereact/divider';
-import ExerciseList from './ExerciseList';
+import React, { useState } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { useNavigate } from 'react-router-dom';
 
-export const WorkoutDetailsPage = () => {
-  const { workoutId } = useParams();
-  const { workout, exercises } = useTracker(() => {
-    Meteor.subscribe('workouts');
-    Meteor.subscribe('exercises');
-    const workout = Workouts.findOne(workoutId);
-    const exercises = Exercises.find().fetch();
-    return { workout, exercises };
-  });
+const WorkoutList = ({ workoutLists }) => {
+  const [selectedWorkoutList, setSelectedWorkoutList] = useState(null);
+  
+  const navigate = useNavigate();
 
-  if (!workout || !exercises) {
-    return <div>Loading...</div>;
-  }
+  const header = (
+    <div className="p-clearfix">
+      <h2>Workout List</h2>
+    </div>
+  );
 
+  
+  const nameBodyTemplate = (rowData) => {
+    return <span>{rowData.name}</span>;
+  };
+
+  const updatedAtBodyTemplate = (rowData) => {
+    const date = new Date(rowData.updatedAt);
+    return <span>{date.toLocaleString()}</span>;
+  };
+  const rowclickHandler = ({data}) => {
+    // Navigate to the details page for the selected row
+    navigate(`/workoutLists/${data._id}`);
+    console.log(data._id); 
+  };
   return (
-    <>
-      <Panel header={workout.name}>
-        <Card className="workout-card">
-          <p className="text-muted">{workout.description}</p>
-          <Divider />
-          <ul>
-            <li>Total Sets: {workout.totalSets}</li>
-            <li>Total Reps: {workout.totalReps}</li>
-            <li>Total Weight: {workout.totalWeight} lbs</li>
-          </ul>
-        </Card>
-      </Panel>
-      <Divider />
-      <Panel header="Exercises">
-        <ExerciseList exercises={exercises} />
-      </Panel>
-    </>
+    <div className="card">
+      <DataTable
+        value={workoutLists}
+        header={header}
+        selectionMode="single"
+        selection={selectedWorkoutList}
+        onSelectionChange={(e) => setSelectedWorkoutList(e.value)}
+        onRowClick={rowclickHandler}
+      >
+        <Column field="_id" header="ID" />
+        <Column field="name" header="Name" body={nameBodyTemplate} />
+        <Column field="updatedAt" header="Updated At" body={updatedAtBodyTemplate} />
+      </DataTable>
+    </div>
   );
 };
+export default WorkoutList;

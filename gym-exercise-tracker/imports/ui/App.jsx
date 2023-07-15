@@ -12,7 +12,8 @@ import { ExercisePage } from '../ui/pages/ExercisePage/ExercisePage';
 import { NavbarMain } from '../../imports/ui/Navbar/navbarMain';
 import WorkoutsPage from './pages/WorkoutPage/WorkoutsPage';
 import WorkoutEditPage from './pages/WorkoutPage/WorkoutEditPage';
-import WorkoutDetailsPage from './pages/WorkoutPage/WorkoutDetailsPage';
+import { WorkoutDetailsPage } from './pages/WorkoutPage/WorkoutDetailsPage';
+
 
 
 export const App = () => (
