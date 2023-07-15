@@ -20,26 +20,30 @@ import '../imports/api/workouts/publications';
 
 // Helper function to insert an exercise into the Exercises collection
 const insertExercise = (exercise) => {
-  Exercises.insert(exercise);
+  try {
+    return Exercises.insert(exercise);
+  } catch (error) {
+    console.error('Error inserting exercise:', error);
+  }
 };
 
 // Helper function to insert a set into the Sets collection
 const insertSet = (set) => {
-  Sets.insert(set);
+  try {
+    return Sets.insert(set);
+  } catch (error) {
+    console.error('Error inserting set:', error);
+  }
 };
 
 // Meteor startup function
 Meteor.startup(() => {
   let benchPress, squat;
 
-// Wrap insertExercise in a synchronous function
-const insertExerciseSync = Meteor.wrapAsync(insertExercise);
+  // Insert dummy exercises.
+  console.log('Inserting dummy exercises...');
 
-// Insert dummy exercises.
-console.log('Inserting dummy exercises...');
-
-try {
-  insertExerciseSync({
+  benchPress = insertExercise({
     name: 'Bench Press',
     description: 'Chest exercise',
     userId: 'user1',
@@ -51,10 +55,8 @@ try {
     totalReps: 200,
     totalWeight: 3700,
   });
-  benchPress = Exercises.findOne({ name: 'Bench Press' });
-  console.log('benchPress:', benchPress);
 
-  insertExerciseSync({
+  squat = insertExercise({
     name: 'Squat',
     description: 'Leg exercise',
     userId: 'user1',
@@ -66,11 +68,7 @@ try {
     totalReps: 160,
     totalWeight: 4400,
   });
-  squat = Exercises.findOne({ name: 'Squat' });
-  console.log('squat:', squat);
-} catch (error) {
-  console.error('Error inserting dummy exercises:', error);
-}
+
   // If the Sets collection is empty, add some dummy data.
   if (Sets.find().count() === 0 && benchPress && squat) {
     insertSet({
@@ -81,6 +79,7 @@ try {
       createdAt: new Date(),
       updatedAt: new Date(),
     });
+
     insertSet({
       exerciseId: benchPress._id,
       weight: 185,
@@ -109,39 +108,32 @@ try {
     });
   }
 
-// If the WorkoutLists collection is empty, add some dummy data.
-if (Workouts.find().count() === 0 && benchPress && squat) {
-  console.log('Inserting dummy workouts...');
+  // If the WorkoutLists collection is empty, add some dummy data.
+  if (Workouts.find().count() === 0 && benchPress && squat) {
+    console.log('Inserting dummy workouts...');
 
-  Workouts.insert({
-    name: 'Workout List 1',
-    userId: 'user1',
-    exercises: [benchPress._id, squat._id],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  }, (error, result) => {
-    if (error) {
+    try {
+      Workouts.insert({
+        name: 'Workout List 1',
+        userId: 'user1',
+        exercises: [benchPress._id, squat._id],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+    } catch (error) {
       console.error('Error inserting Workout List 1:', error);
-    } else {
-      console.log('Workout List 1 inserted successfully:', result);
     }
-  });
 
-  Workouts.insert({
-    name: 'Workout List 2',
-    userId: 'user1',
-    exercises: [squat._id],
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  }, (error, result) => {
-    if (error) {
+    try {
+      Workouts.insert({
+        name: 'Workout List 2',
+        userId: 'user1',
+        exercises: [squat._id],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+    } catch (error) {
       console.error('Error inserting Workout List 2:', error);
-    } else {
-      console.log('Workout List 2 inserted successfully:', result);
     }
-  });
-} else {
-  console.log('Skipping insertion of dummy workouts:', Workouts.find().count(), benchPress, squat);
-}
+  }
 });
-
