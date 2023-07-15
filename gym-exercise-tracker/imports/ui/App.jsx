@@ -9,10 +9,9 @@ import { TotalRepsPage } from './pages/TotalRepsPage';
 import { MaxWeightPage } from './pages/MaxWeightPage';
 import { ProfilePage } from './pages/ProfilePage';
 import { ExercisePage } from '../ui/pages/ExercisePage/ExercisePage';
-import WorkoutsPage from './pages/WorkoutPage/WorkoutsPage';
-import WorkoutDetailsPage from './pages/WorkoutPage/WorkoutDetailsPage';
-import WorkoutEditPage from './pages/WorkoutPage/WorkoutEditPage';
 import { NavbarMain } from '../../imports/ui/Navbar/navbarMain';
+import WorkoutsPage from './pages/WorkoutPage/WorkoutsPage';
+
 
 export const App = () => (
   <>

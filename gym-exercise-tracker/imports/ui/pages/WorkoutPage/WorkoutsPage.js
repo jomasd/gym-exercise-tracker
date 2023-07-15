@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Workouts } from '../../api/workouts/WorkoutsCollection';
-import { Workout } from '../components/Workout';
+import { Workouts } from '../../../api/workouts/WorkoutsCollection';
+import { Workout } from '../../components/Workout';
 
 const WorkoutsPage = ({ workouts }) => (
   <div className="workouts-page">
