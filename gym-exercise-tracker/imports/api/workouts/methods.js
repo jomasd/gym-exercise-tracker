@@ -23,17 +23,19 @@ Meteor.methods({
     return Workouts.update(workoutId, { $set: { name } });
   },
 
-  'workouts.addExercise'(workoutId, exerciseId) {
+  'workouts.addExercise'(workoutId, exerciseId, recommendedSets, recommendedReps) {
     check(workoutId, String);
     check(exerciseId, String);
+    check(recommendedSets, Number);
+    check(recommendedReps, Number);
 
-    return Workouts.update(workoutId, { $push: { exercises: exerciseId } });
+    return Workouts.update(workoutId, { $push: { exercises: { exerciseId, recommendedSets, recommendedReps } } });
   },
 
   'workouts.removeExercise'(workoutId, exerciseId) {
     check(workoutId, String);
     check(exerciseId, String);
 
-    return Workouts.update(workoutId, { $pull: { exercises: exerciseId } });
+    return Workouts.update(workoutId, { $pull: { 'exercises': { 'exerciseId': exerciseId } } });
   },
 });
