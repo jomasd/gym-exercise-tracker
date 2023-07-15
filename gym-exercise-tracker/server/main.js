@@ -32,38 +32,45 @@ const insertSet = (set) => {
 Meteor.startup(() => {
   let benchPress, squat;
 
-  // If the Exercises collection is empty, add some dummy data.
-  if (Exercises.find().count() === 0) {
-    insertExercise({
-      name: 'Bench Press',
-      description: 'Chest exercise',
-      userId: 'user1',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      oneRepMax: 225,
-      maxWeight: 185,
-      totalSets: 20,
-      totalReps: 200,
-      totalWeight: 3700,
-    });
+// Wrap insertExercise in a synchronous function
+const insertExerciseSync = Meteor.wrapAsync(insertExercise);
 
-    insertExercise({
-      name: 'Squat',
-      description: 'Leg exercise',
-      userId: 'user1',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      oneRepMax: 315,
-      maxWeight: 275,
-      totalSets: 20,
-      totalReps: 160,
-      totalWeight: 4400,
-    });
+// Insert dummy exercises.
+console.log('Inserting dummy exercises...');
 
-    benchPress = Exercises.findOne({ name: 'Bench Press' });
-    squat = Exercises.findOne({ name: 'Squat' });
-  }
+try {
+  insertExerciseSync({
+    name: 'Bench Press',
+    description: 'Chest exercise',
+    userId: 'user1',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    oneRepMax: 225,
+    maxWeight: 185,
+    totalSets: 20,
+    totalReps: 200,
+    totalWeight: 3700,
+  });
+  benchPress = Exercises.findOne({ name: 'Bench Press' });
+  console.log('benchPress:', benchPress);
 
+  insertExerciseSync({
+    name: 'Squat',
+    description: 'Leg exercise',
+    userId: 'user1',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    oneRepMax: 315,
+    maxWeight: 275,
+    totalSets: 20,
+    totalReps: 160,
+    totalWeight: 4400,
+  });
+  squat = Exercises.findOne({ name: 'Squat' });
+  console.log('squat:', squat);
+} catch (error) {
+  console.error('Error inserting dummy exercises:', error);
+}
   // If the Sets collection is empty, add some dummy data.
   if (Sets.find().count() === 0 && benchPress && squat) {
     insertSet({
@@ -102,23 +109,39 @@ Meteor.startup(() => {
     });
   }
 
-  // If the WorkoutLists collection is empty, add some dummy data.
-  if (Workouts.find().count() === 0 && benchPress && squat) {
-    Workouts.insert({
-      name: 'Workout List 1',
-      userId: 'user1',
-      exercises: [benchPress._id, squat._id],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
+// If the WorkoutLists collection is empty, add some dummy data.
+if (Workouts.find().count() === 0 && benchPress && squat) {
+  console.log('Inserting dummy workouts...');
 
-    Workouts.insert({
-      name: 'Workout List 2',
-      userId: 'user1',
-      exercises: [squat._id],
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    });
-  }
+  Workouts.insert({
+    name: 'Workout List 1',
+    userId: 'user1',
+    exercises: [benchPress._id, squat._id],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }, (error, result) => {
+    if (error) {
+      console.error('Error inserting Workout List 1:', error);
+    } else {
+      console.log('Workout List 1 inserted successfully:', result);
+    }
+  });
+
+  Workouts.insert({
+    name: 'Workout List 2',
+    userId: 'user1',
+    exercises: [squat._id],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  }, (error, result) => {
+    if (error) {
+      console.error('Error inserting Workout List 2:', error);
+    } else {
+      console.log('Workout List 2 inserted successfully:', result);
+    }
+  });
+} else {
+  console.log('Skipping insertion of dummy workouts:', Workouts.find().count(), benchPress, squat);
+}
 });
 
