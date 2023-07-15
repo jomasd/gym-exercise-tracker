@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Meteor } from 'meteor/meteor';
+import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Workouts } from '../../../api/workouts/WorkoutsCollection';
-import { Workout } from '../../components/Workout';
+import { Workouts } from '../../api/workouts/WorkoutsCollection';
+import { WorkoutsList } from '../components/WorkoutsList';
 
 const WorkoutsPage = ({ workouts }) => (
   <div className="workouts-page">
     <h1>Workouts</h1>
-    {workouts.map((workout) => (
-      <Workout key={workout._id} workout={workout} />
-    ))}
+    <WorkoutsList workouts={workouts} />
   </div>
 );
 

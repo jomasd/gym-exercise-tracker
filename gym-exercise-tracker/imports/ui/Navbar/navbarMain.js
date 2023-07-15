@@ -38,6 +38,10 @@ export const NavbarMain = () => {
       label: 'Sign Up',
       url: '/signup',
     },
+    {
+      label: 'Workouts',
+      url: '/Workouts',
+    },
   ];
 
   const end = (
