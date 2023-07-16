@@ -32,7 +32,7 @@ const WorkoutsList = ({ workouts }) => {
         onSelectionChange={(e) => setSelectedWorkout(e.value)}
         onRowClick={rowclickHandler}
       >
-        <Column field="_id" header="ID" />
+        {/* <Column field="_id" header="ID" /> */}
         <Column field="name" header="Name" body={workoutBodyTemplate} />
         {/* Add more columns for other workout details here */}
       </DataTable>

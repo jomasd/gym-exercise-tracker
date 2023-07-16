@@ -9,7 +9,7 @@ export const HomePage = () => {
         <ul>
           <li><Link to="/exercises">View Exercises</Link></li>
           <li><Link to="/sets">View Sets</Link></li>
-          <li><Link to="/workoutLists">View Workout Lists</Link></li>
+          <li><Link to="/workouts">View Workout Lists</Link></li>
         </ul>
       </nav>
     </div>
