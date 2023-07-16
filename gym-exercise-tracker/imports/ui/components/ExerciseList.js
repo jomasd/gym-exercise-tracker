@@ -62,7 +62,7 @@ const ExerciseList = ({ exercises }) => {
         onSelectionChange={(e) => setSelectedExercise(e.value)}
         onRowClick={rowclickHandler}
       >
-        <Column field="_id" header="ID" />
+        {/* <Column field="_id" header="ID" /> */}
         <Column field="name" header="Name" body={exerciseBodyTemplate} />
         <Column field="description" header="Description" body={descriptionBodyTemplate} />
         <Column field="maxWeight" header="Max Weight" body={maxWeightBodyTemplate} />
@@ -70,7 +70,7 @@ const ExerciseList = ({ exercises }) => {
         <Column field="totalSets" header="Total Sets" body={totalSetsBodyTemplate} />
         <Column field="totalReps" header="Total Reps" body={totalRepsBodyTemplate} />
         <Column field="totalWeight" header="Total Weight" body={totalWeightBodyTemplate} />
-        <Column field="updatedAt" header="Updated At" body={updatedAtBodyTemplate} />
+        {/* <Column field="updatedAt" header="Updated At" body={updatedAtBodyTemplate} /> */}
       </DataTable>
     </div>
   );
